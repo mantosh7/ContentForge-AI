@@ -9,12 +9,16 @@ import Community from "./pages/Community"
 import RemoveBackground from "./pages/RemoveBackground"
 import RemoveObject from "./pages/RemoveObject"
 import ReviewResume from "./pages/ReviewResume"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 
 export default function App()
 {
   return <div>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/ai" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path="write-article" element={<WriteArticle />} />

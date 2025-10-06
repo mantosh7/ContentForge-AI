@@ -6,6 +6,5 @@
 }
 
 @theme{
-  --color-aiColor: #7B68EE ;
-  /* --color-aiTools: linear-gradient(90deg, #7B68EE, #00FFFF); */
+  --color-primary: #7B68EE ;
 }
