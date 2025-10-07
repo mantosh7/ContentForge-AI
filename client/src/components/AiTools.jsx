@@ -6,19 +6,28 @@ const AiTools = () => {
   const navigate = useNavigate() ;
 
   return (
-    <div className='pt-30'>
+
+    <div className='pt-30 flex flex-col px-4 relative flex flex-col w-full justify-center'>
       <div className='text-center'>
         <h1 className='text-4xl font-bold text-slate-300'>Ultimate AI Toolkit</h1>
-        <p className='mt-3 max-w-xl m-auto text-gray-500'>Craft smarter, better, and faster content with AI.</p>
+        <p className='mt-3 m-auto text-gray-500'>Craft smarter, better, and faster content with AI.</p>
       </div>
 
-      <div className='flex flex-wrap justify-content'>
-        {AiToolsData.map((tool, index) => {
-            <div key={index} className='p-8 m-4 max-w-xs rounded-lg shadow-lg border border-gray-100 cursor-pointer'
-            onClick={()=>user && navigate(tool.path)}>
-              <tool.Icon className='w-12 h-12 p-3 text-white rounded-xl' style={{background:`linear-gradient(to bottom, ${tool.bg.from},${tool.bg.to})`}} />
+      <div className='flex flex-wrap justify-content m-12 items-center'>
+        <div className='flex flex-wrap justify-center gap-4'>
+          {AiToolsData.map((tool, index) => {
+          return (
+            <div key={index} className='p-6 m-4 max-w-xs rounded-2xl border border-gray-700 cursor-pointer hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] transition-all-ease duration-200'
+            onClick={()=>navigate(tool.path)}>
+              <tool.Icon className='w-12 h-12 p-3 text-white rounded-md' style={{background:`linear-gradient(to bottom, ${tool.bg.from},${tool.bg.to})`}} />
+
+              <div className='pt-6 font-semibold text-xl '>{tool.title}</div>
+
+              <div className='mt-4 text-gray-400'>{tool.description}</div>
             </div>
+          )
         })}
+        </div>
       </div>
     </div>
   )

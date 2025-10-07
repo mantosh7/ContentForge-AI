@@ -68,26 +68,30 @@ export const AiToolsData = [
 export const dummyTestimonialData = [
     {
         image: assets.profile_img_1,
-        name: 'John Doe',
-        title: 'Marketing Director, TechCorp',
-        content: 'ContentAI has revolutionized our content workflow. The quality of the articles is outstanding, and it saves us hours of work every week.',
-        rating: 4,
-    },
-    {
-        image: assets.profile_img_1,
-        name: 'Jane Smith',
-        title: 'Content Creator, TechCorp',
-        content: 'ContentAI has made our content creation process effortless. The AI tools have helped us produce high-quality content faster than ever before.',
+        name: 'Sarah Johnson',
+        title: 'Content Strategist, BrightWave Media',
+        content:
+            '"ContentForge-AI helps our team turn ideas into polished articles within minutes. It’s intuitive, reliable, and the content quality always exceeds expectations."',
         rating: 5,
     },
     {
-        image: assets.profile_img_1,
-        name: 'David Lee',
-        title: 'Content Writer, TechCorp',
-        content: 'ContentAI has transformed our content creation process. The AI tools have helped us produce high-quality content faster than ever before.',
+        image: assets.profile_img_2,
+        name: 'Ravi Sharma',
+        title: 'Marketing Lead, Growthify',
+        content:
+            '"We’ve streamlined our entire content pipeline using ContentForge-AI. From blogs to ad copies, it delivers engaging text that fits perfectly with our campaigns."',
+        rating: 5,
+    },
+    {
+        image: assets.profile_img_3,
+        name: 'Emily Carter',
+        title: 'Freelance Copywriter',
+        content:
+            '"This tool has become my daily writing companion. ContentForge-AI makes drafting faster, more creative, and surprisingly personal — I can’t imagine working without it."',
         rating: 4,
     },
-]
+];
+
 
 
 export const dummyCreationData = [
