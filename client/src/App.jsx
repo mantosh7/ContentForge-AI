@@ -11,24 +11,26 @@ import RemoveObject from "./pages/RemoveObject"
 import ReviewResume from "./pages/ReviewResume"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
+import AppLayout from "./components/AppLayout"
 
-export default function App()
-{
+export default function App() {
   return <div>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/ai" element={<Layout />}>
-        <Route index element={<Dashboard />} />
-        <Route path="write-article" element={<WriteArticle />} />
-        <Route path="blog-title" element={<BlogTitles />} />
-        <Route path="community" element={<Community />} />
-        <Route path="generate-images" element={<GenerateImages />} />
-        <Route path="remove-background" element={<RemoveBackground />} />
-        <Route path="remove-object" element={<RemoveObject />} />
-        <Route path="review-resume" element={<ReviewResume />} />
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/ai" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="write-article" element={<WriteArticle />} />
+          <Route path="blog-title" element={<BlogTitles />} />
+          <Route path="community" element={<Community />} />
+          <Route path="generate-images" element={<GenerateImages />} />
+          <Route path="remove-background" element={<RemoveBackground />} />
+          <Route path="remove-object" element={<RemoveObject />} />
+          <Route path="review-resume" element={<ReviewResume />} />
+        </Route>
       </Route>
     </Routes>
-  </div>
+  </div >
 }

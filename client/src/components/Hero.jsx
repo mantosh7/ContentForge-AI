@@ -6,10 +6,10 @@ const Hero = () => {
     const navigate = useNavigate();
 
     return (
-        <div className='px-4 pt-60 relative flex flex-col w-full justify-center'>
+        <div className='px-4 pt-60 flex flex-col w-full justify-center'>
 
             <div className='text-center mb-6'>
-                <h1 className='text-7xl font-semibold mx-auto leading-[1.2]'>Turn creativity into reality <br /> with <span className='text-primary'> AI tools</span></h1>
+                <h1 className='text-7xl font-semibold mx-auto leading-[1.2] '>Turn creativity into reality <br /> with <span className='text-primary'> AI tools</span></h1>
                 <p className='mt-4 max-w-xl m-auto text-gray-500'>Revolutionize your content workflow with our all-in-one AI platform—create articles, generate visuals, and streamline your productivity.</p>
             </div>
 

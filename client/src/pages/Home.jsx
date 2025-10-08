@@ -1,15 +1,16 @@
 import AiTools from "@/components/AiTools";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import PremiumPlan from "@/components/PremiumPlan";
 import Testimonial from "@/components/Testimonial";
 
 const Home = () => {
     return (
         <>
-            <Navbar />
             <Hero />
             <AiTools />
             <Testimonial />
+            <PremiumPlan />
         </>
     )
 }

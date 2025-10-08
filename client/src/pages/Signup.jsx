@@ -8,10 +8,9 @@ import { LuEyeClosed } from "react-icons/lu";
 
 const Signup = () => {
     return (
-        
-        <div className='flex items-center justify-center min-h-screen w-screen'>
-            <div className='flex flex-col border-2 max-w-md w-full items-center justify-center border-gray-800 rounded-lg p-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]'>
 
+        <div className='flex items-center justify-center min-h-screen w-screen pt-20'>
+            <div className='flex flex-col border-2 max-w-md w-full items-center justify-center border-gray-800 rounded-lg p-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]'>
                 <div >
                     <h1 className='font-semibold text-3xl mb-6 mt-4'>Create Your Account</h1>
 

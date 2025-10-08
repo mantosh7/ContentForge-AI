@@ -3,7 +3,9 @@ import gradientBackground from "./gradientBackground.png";
 import user_group from "./user_group.png";
 import star_icon from "./star_icon.svg";
 import star_dull_icon from "./star_dull_icon.svg";
-import profile_img_1 from "./profile_img_1.png";
+import profile_img_1 from "./profile_img_1.jpg";
+import profile_img_2 from "./profile_img_2.jpg";
+import profile_img_3 from "./profile_img_3.jpg";
 import arrow_icon from "./arrow_icon.svg";
 import { SquarePen, Hash, Image, Eraser, Scissors, FileText } from 'lucide-react'
 import ai_gen_img_1 from "./ai_gen_img_1.png";
@@ -17,6 +19,8 @@ export const assets = {
     star_icon,
     star_dull_icon,
     profile_img_1,
+    profile_img_2,
+    profile_img_3,
     arrow_icon,
 };
 
@@ -68,7 +72,7 @@ export const AiToolsData = [
 export const dummyTestimonialData = [
     {
         image: assets.profile_img_1,
-        name: 'Sarah Johnson',
+        name: 'Dennis Evans',
         title: 'Content Strategist, BrightWave Media',
         content:
             '"ContentForge-AI helps our team turn ideas into polished articles within minutes. It’s intuitive, reliable, and the content quality always exceeds expectations."',
@@ -76,7 +80,7 @@ export const dummyTestimonialData = [
     },
     {
         image: assets.profile_img_2,
-        name: 'Ravi Sharma',
+        name: 'Emily Carter',
         title: 'Marketing Lead, Growthify',
         content:
             '"We’ve streamlined our entire content pipeline using ContentForge-AI. From blogs to ad copies, it delivers engaging text that fits perfectly with our campaigns."',
@@ -84,7 +88,7 @@ export const dummyTestimonialData = [
     },
     {
         image: assets.profile_img_3,
-        name: 'Emily Carter',
+        name: 'Chris Jones',
         title: 'Freelance Copywriter',
         content:
             '"This tool has become my daily writing companion. ContentForge-AI makes drafting faster, more creative, and surprisingly personal — I can’t imagine working without it."',
