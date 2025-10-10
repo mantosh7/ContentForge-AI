@@ -1,9 +1,12 @@
-const Dashboard = () =>{
+
+const Dashboard = () => {
     return (
-        <div>
-            <h1>Dashboard</h1>
+        
+        <div className="mt-20 flex-1 bg-[#2a2929ff] text-white">
+            Dashboard
+
         </div>
     )
 }
 
-export default Dashboard ;
+export default Dashboard;

@@ -10,7 +10,6 @@ const AppLayout = () => {
             <main className="flex-1">
                 <Outlet />
             </main>
-            <Footer />
         </div>
     )
 }

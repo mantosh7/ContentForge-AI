@@ -7,13 +7,13 @@ const AiTools = () => {
 
   return (
 
-    <div className='pt-30 flex flex-col px-4 relative flex flex-col w-full justify-center'>
+    <div className='pt-30 flex flex-col px-4 flex flex-col w-full justify-center'>
       <div className='text-center'>
         <h1 className='text-4xl font-bold'>Ultimate AI Toolkit</h1>
         <p className='mt-3 m-auto text-gray-500'>Craft smarter, better, and faster content with AI.</p>
       </div>
 
-      <div className='flex flex-wrap justify-content m-12 items-center'>
+      <div className='flex flex-wrap justify-center m-12 items-center'>
         <div className='flex flex-wrap justify-center gap-4'>
           {AiToolsData.map((tool, index) => {
           return (

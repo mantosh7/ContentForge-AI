@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/ai" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="write-article" element={<WriteArticle />} />
-          <Route path="blog-title" element={<BlogTitles />} />
+          <Route path="blog-titles" element={<BlogTitles />} />
           <Route path="community" element={<Community />} />
           <Route path="generate-images" element={<GenerateImages />} />
           <Route path="remove-background" element={<RemoveBackground />} />
