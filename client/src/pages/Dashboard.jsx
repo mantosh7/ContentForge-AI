@@ -17,7 +17,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className="mt-20 border-2 overflow-y-scroll flex-1 bg-[#2a2929ff] text-gray-600 ">
+        <div className="mt-20 border-2 overflow-y-scroll flex-1 bg-[#393838ff] text-gray-600 ">
             <div className="flex flex-row items-center gap-20 w-fit h-auto p-4 m-10 rounded-2xl text-white border-0 border-gray-400 bg-gradient-to-r from-[#42275a] to-[#734b6d]">
                 <div className="flex flex-col">
                     <h1 className="font-bold text-xl">Total Creations</h1>
