@@ -1,14 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { HiOutlineMail } from "react-icons/hi";
 import { CiLock } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import { CiUser } from "react-icons/ci";
 import { LuEyeClosed } from "react-icons/lu";
+import axios from 'axios';
 
 
 const Signup = () => {
-    return (
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
+    const handleSignup = async (e) => {
+        {
+            e.preventDefault();
+
+            if (confirmPassword !== password) return alert('confirm password does not match');
+
+            try {
+                const response = await axios.post("http://localhost:3000/api/auth/signup", {
+                    full_name: fullName,
+                    email,
+                    password
+                }, { withCredentials: true }
+                )
+
+                console.log("Signup successful:", response.data);
+                alert("Signup successful!");
+                setFullName('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+            } catch (error) {
+                const message =
+                    error.response?.data?.message || 
+                    error.response?.data?.error ||  
+                    error.message;                  
+
+                alert(message); 
+                console.error("Signup error:", message);
+            }
+        };
+    }
+
+    return (
         <div className='flex items-center justify-center min-h-screen w-screen pt-20'>
             <div className='flex flex-col border-2 max-w-md w-full items-center justify-center border-gray-800 rounded-lg p-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]'>
                 <div >
@@ -31,35 +68,35 @@ const Signup = () => {
                     <div className='max-w-xs w-full mb-6'>
                         <div className='flex items-center border border-gray-600 rounded-sm'>
                             <CiUser className='ml-4 text-gray-400 h-6 w-6' />
-                            <input type="text" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your full name' />
+                            <input onChange={(e) => setFullName(e.target.value)} value={fullName} type="text" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your full name' />
                         </div>
                     </div>
 
                     <div className='max-w-xs w-full mb-6'>
                         <div className='flex items-center border border-gray-600 rounded-sm'>
                             <HiOutlineMail className='ml-4 text-gray-500 h-6 w-6' />
-                            <input type="email" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Email' />
+                            <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Email' />
                         </div>
                     </div>
 
                     <div className='max-w-xs w-full mb-6'>
                         <div className='flex items-center border border-gray-600 rounded-sm'>
                             <CiLock className='ml-4 text-gray-400 h-6 w-6' />
-                            <input type="password" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Password' />
+                            <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Password' />
                         </div>
                     </div>
 
                     <div className='max-w-xs w-full mb-6'>
                         <div className='flex items-center border border-gray-600 rounded-sm'>
                             <LuEyeClosed className='ml-4 text-gray-500 h-6 w-6' />
-                            <input type="password" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Confirm your password' />
+                            <input onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} type="password" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Confirm your password' />
                         </div>
                     </div>
 
                 </div>
 
                 <div className='max-w-md w-full flex justify-center mt-4'>
-                    <button className='border border-gray-500 rounded-full w-48 h-8 bg-gradient-to-r from-purple-500 to-purple-900 px-5  cursor-pointer text-center'>Sign Up</button>
+                    <button onClick={handleSignup} className='border border-gray-500 rounded-full w-48 h-8 bg-gradient-to-r from-purple-500 to-purple-900 px-5  cursor-pointer text-center'>Sign Up</button>
                 </div>
 
                 <div className='flex max-w-md w-xs justify-center mt-6 mb-4'>
