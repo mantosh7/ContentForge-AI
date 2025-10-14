@@ -12,7 +12,7 @@ export async function signup(req, res) {
 
     const hashedPassword = await hashPassword(password);
     const user = await insertUser({ full_name, email, password: hashedPassword, google_id: null });
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ id: user.id, full_name: user.full_name }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -37,14 +37,14 @@ export async function login(req, res) {
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "invalid login credentials" });
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user.id, full_name: user.full_name }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -66,7 +66,7 @@ export async function logout(req, res) {
   res.cookie("token", "", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     expires: new Date(0),
   });
   res.status(200).json({ message: "Logged out successfully" });
