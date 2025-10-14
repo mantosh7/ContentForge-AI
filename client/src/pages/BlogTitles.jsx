@@ -2,7 +2,7 @@ import { Edit, Hash, Sparkle } from "lucide-react";
 import { useState } from "react";
 import { IoSparklesSharp } from "react-icons/io5";
 
-const blogCategory = ["General", "Technology", "Business", "Health", "Lifestyle", "Education", "Travel", "Food"] ;
+const blogCategory = ["General", "Technology", "Business", "Health", "Lifestyle", "Education", "Travel", "Food"];
 
 const BlogTitles = () => {
     const [selectedCategory, setselectedCategory] = useState(blogCategory[0]);

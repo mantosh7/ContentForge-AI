@@ -12,7 +12,7 @@ const AiTools = () => {
         <h1 className='text-4xl font-bold'>Ultimate AI Toolkit</h1>
         <p className='mt-3 m-auto text-gray-500'>Craft smarter, better, and faster content with AI.</p>
       </div>
-
+ 
       <div className='flex flex-wrap justify-center m-12 items-center'>
         <div className='flex flex-wrap justify-center gap-4'>
           {AiToolsData.map((tool, index) => {

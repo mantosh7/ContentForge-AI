@@ -17,7 +17,7 @@ export async function signup(req, res) {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 7 * 24 * 60 * 60 * 1000, 
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(201).json({ user });
@@ -26,3 +26,61 @@ export async function signup(req, res) {
   }
 }
 
+
+export async function login(req, res) {
+  const { email, password } = req.body;
+
+  try {
+    const user = await findUserByEmail(email);
+    if (!user) return res.status(400).json({ message: "user does not exists" });
+
+    const isMatch = await comparePassword(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: "invalid login credentials" });
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({
+      message: "Login successful",
+      user: {
+        id: user.id,
+        full_name: user.full_name,
+        email: user.email,
+      },
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export async function logout(req, res) {
+  res.cookie("token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: "Logged out successfully" });
+}
+
+
+export async function checkAuth(req, res) {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ loggedIn: false });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return res.status(200).json({ loggedIn: true, userId: decoded.id, username: decoded.full_name });
+  } catch (err) {
+    return res.status(401).json({ loggedIn: false });
+  }
+}

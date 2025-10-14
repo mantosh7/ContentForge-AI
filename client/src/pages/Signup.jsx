@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { HiOutlineMail } from "react-icons/hi";
 import { CiLock } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CiUser } from "react-icons/ci";
 import { LuEyeClosed } from "react-icons/lu";
 import axios from 'axios';
@@ -12,6 +12,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate() ;
 
     const handleSignup = async (e) => {
         {
@@ -29,10 +30,8 @@ const Signup = () => {
 
                 console.log("Signup successful:", response.data);
                 alert("Signup successful!");
-                setFullName('');
-                setEmail('');
-                setPassword('');
-                setConfirmPassword('');
+                navigate("/login") ;
+                
             } catch (error) {
                 const message =
                     error.response?.data?.message || 

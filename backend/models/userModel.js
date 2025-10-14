@@ -1,17 +1,23 @@
 import sql from "../configs/db.js";
 
-export async function createUsersTable() {
-  await sql`
-    CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
-      full_name VARCHAR(100) NOT NULL,
-      email VARCHAR(150) UNIQUE NOT NULL,
-      password TEXT,
-      google_id TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `;
-}
+// export async function createUsersTable() {
+//   try {
+//     await sql`
+//       CREATE TABLE IF NOT EXISTS users (
+//         id SERIAL PRIMARY KEY,
+//         full_name VARCHAR(100) NOT NULL,
+//         email VARCHAR(150) UNIQUE NOT NULL,
+//         password TEXT,
+//         google_id TEXT,
+//         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+//       );
+//     `;
+//     console.log("Users table exists or was created successfully");
+//   } catch (err) {
+//     console.error("Error creating users table:", err);
+//     throw err;
+//   }
+// }
 
 export async function insertUser({ full_name, email, password, google_id }) {
   const response = await sql`

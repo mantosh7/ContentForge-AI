@@ -1,9 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { HiOutlineMail } from "react-icons/hi";
 import { CiLock } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
+import { authState } from '@/state/authState';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const setAuth = useSetRecoilState(authState);
+  const navigate = useNavigate();
+
+  async function handleLogin() {
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/auth/login", {
+        email,
+        password
+      }, { withCredentials: true })
+
+
+      setAuth({
+        isLoggedIn: true,
+        username: response.data.user.full_name,
+        loading: false
+      });
+
+      alert(response.data.message);
+      navigate("/ai");
+
+    } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message;
+
+      alert(message);
+      console.error("Signup error:", message);
+    }
+  }
+
   return (
     <div className='flex items-center justify-center min-h-screen w-screen pt-20'>
       <div className='flex flex-col border-2 max-w-md w-full items-center justify-center border-gray-800 rounded-lg p-6 shadow-[0_0_20px_rgba(168,85,247,0.4)]'>
@@ -28,14 +65,14 @@ const Login = () => {
           <div className='max-w-xs w-full mb-6'>
             <div className='flex items-center border border-gray-600 rounded-sm'>
               <HiOutlineMail className='ml-4 text-gray-500 h-6 w-6' />
-              <input type="email" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Email' />
+              <input onChange={(e) => setEmail(e.target.value)} type="email" value={email} className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Email' required />
             </div>
           </div>
 
           <div className='max-w-xs w-full mb-4'>
             <div className='flex items-center border border-gray-600 rounded-sm'>
               <CiLock className='ml-4 text-gray-400 h-6 w-6' />
-              <input type="password" className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Password' />
+              <input onChange={(e) => setPassword(e.target.value)} type="password" value={password} className='h-8 w-full ml-8 text-gray-300 focus:outline-none' placeholder='Enter your Password' required />
             </div>
 
             <div className='text-blue-400 mt-4 text-end cursor-pointer text-xs hover:underline'>
@@ -44,7 +81,7 @@ const Login = () => {
         </div>
 
         <div className='max-w-md w-full flex justify-center mt-4'>
-          <button className='border border-gray-500 rounded-full w-48 h-8 bg-gradient-to-r from-purple-500 to-purple-900 px-5  cursor-pointer text-center'>Log in</button>
+          <button onClick={handleLogin} className='border border-gray-500 rounded-full w-48 h-8 bg-gradient-to-r from-purple-500 to-purple-900 px-5  cursor-pointer text-center'>Log in</button>
         </div>
 
         <div className='flex max-w-md w-xs justify-center mt-6 mb-8'>
@@ -57,4 +94,4 @@ const Login = () => {
   )
 }
 
-export default Login ;
+export default Login;

@@ -1,9 +1,28 @@
+import axios from 'axios';
 import { ArrowRight } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+    const [loading, setLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get("http://localhost:3000/api/auth/check-auth", { withCredentials: true })
+            .then(res => {
+                setIsLoggedIn(res.data.loggedIn);
+                setLoading(false);
+            })
+            .catch(() => setLoading(false));
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+
+    function handleStartNow() {
+        if (isLoggedIn) navigate("/ai");
+        else navigate("/login");
+    }
 
     return (
         <div className='px-4 pt-60 flex flex-col w-full justify-center'>
@@ -14,7 +33,7 @@ const Hero = () => {
             </div>
 
             <div className='flex justify-center gap-4'>
-                <button onClick={() => navigate('/ai')} className='flex items-center bg-gradient-to-r from-purple-500 to-purple-900 px-5 py-2.5 rounded-lg cursor-pointer'>Start creating now<ArrowRight className='w-4 h-4 ml-2' /></button>
+                <button onClick={handleStartNow} className='flex items-center bg-gradient-to-r from-purple-500 to-purple-900 px-5 py-2.5 rounded-lg cursor-pointer'>Start creating now<ArrowRight className='w-4 h-4 ml-2' /></button>
 
                 <button className='flex items-center bg-gradient-to-r from-purple-500 to-purple-900 px-5 py-2.5 rounded-lg cursor-pointer'>watch demo <ArrowRight className='w-4 h-4 ml-2' /></button>
             </div>
