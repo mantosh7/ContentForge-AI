@@ -12,6 +12,7 @@ import ReviewResume from "./pages/ReviewResume"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import AppLayout from "./components/AppLayout"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 export default function App() {
   return <div>
@@ -20,7 +21,11 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/ai" element={<Layout />}>
+        <Route path="/ai" element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }>
           <Route index element={<Dashboard />} />
           <Route path="write-article" element={<WriteArticle />} />
           <Route path="blog-titles" element={<BlogTitles />} />
