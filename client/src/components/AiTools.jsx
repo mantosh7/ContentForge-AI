@@ -1,9 +1,13 @@
 import { AiToolsData } from '@/assets/assets'
+import { authState } from '@/state/authState';
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useRecoilValue } from 'recoil';
 
 const AiTools = () => {
   const navigate = useNavigate() ;
+  const auth = useRecoilValue(authState) ;
+  const {isLoggedIn, username, loading} = auth ;
 
   return (
 
@@ -18,7 +22,7 @@ const AiTools = () => {
           {AiToolsData.map((tool, index) => {
           return (
             <div key={index} className='p-6 m-4 max-w-xs rounded-2xl border border-gray-700 cursor-pointer hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] hover:scale-101 transition-all duration-200'
-            onClick={()=>navigate(tool.path)}>
+            onClick={()=>isLoggedIn ? navigate(tool.path) : navigate("/login")}>
               <tool.Icon className='w-12 h-12 p-3 text-white rounded-md' style={{background:`linear-gradient(to bottom, ${tool.bg.from},${tool.bg.to})`}} />
 
               <div className='pt-6 font-semibold text-xl '>{tool.title}</div>
