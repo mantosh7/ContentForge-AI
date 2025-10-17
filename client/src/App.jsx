@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 export default function App() {
   return <div>
     <Routes>
+      
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="review-resume" element={<ReviewResume />} />
         </Route>
       </Route>
+
     </Routes>
   </div >
 }

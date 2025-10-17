@@ -21,6 +21,7 @@ const Navbar = () => {
         setAuth({
           isLoggedIn: response.data.loggedIn,
           username: response.data.username || "",
+          userId: response.data.userId,
           loading: false
         })
       } catch (error) {
@@ -47,7 +48,8 @@ const Navbar = () => {
       setAuth({
         isLoggedIn: false,
         username: "",
-        loading: false
+        loading: false,
+        userId: NULL,
       })
       navigate("/");
     } catch (err) {

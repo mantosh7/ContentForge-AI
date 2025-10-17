@@ -5,6 +5,7 @@ export const authState = atom({
     default: {
         isLoggedIn: false,
         username: "",
+        userId: "",
         loading: true,
     },
 });

@@ -55,6 +55,7 @@ export async function login(req, res) {
         full_name: user.full_name,
         email: user.email,
       },
+      token
     });
 
   } catch (error) {

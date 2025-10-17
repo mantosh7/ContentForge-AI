@@ -1,6 +1,8 @@
+import { authState } from "@/state/authState";
 import { Edit, Sparkle } from "lucide-react";
 import { useState } from "react";
 import { IoSparklesSharp } from "react-icons/io5";
+import { useRecoilValue } from "recoil";
 
 const articleLength = [
     { length: 800, text: "Short (500-800 words)" },
@@ -11,9 +13,13 @@ const articleLength = [
 const WriteArticle = () => {
     const [selectedLength, setselectedLength] = useState(articleLength[0]);
     const [input, setInput] = useState("");
+    const { userId } = useRecoilValue(authState );
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        const response = await axios.post("http://localhost:3000/api/ai/generate-article", {
+            prompt: input,
+        })
     }
 
     return (

@@ -17,7 +17,7 @@ const Testimonial = () => {
                         return (
                             <div key={index} className='p-6 pt-2 m-4 max-w-xs rounded-2xl border border-gray-700 cursor-pointer hover:shadow-[0_0_25px_rgba(99,102,241,0.7)] transition-all ease-in-out duration-200'
                                 onClick={() => navigate(review.path)}>
-                                <div className='flex pt-4'>
+                                <div className='flex pt-3'>
                                     {[1, 2, 3, 4, 5].map((num) =>
                                         num <= review.rating ? (
                                             <RiStarSFill key={num} className="text-yellow-400 text-xl" />
@@ -27,10 +27,10 @@ const Testimonial = () => {
                                     )}
                                 </div>
 
-                                <div className='mt-4 text-[#EEEEEE] italic'>{review.content}</div>
+                                <div className='mt-2 text-[#EEEEEE] italic'>{review.content}</div>
 
                                 {/* for underline */}
-                                <div className='mt-6'>
+                                <div className='mt-4'>
                                     <div className='flex-1 border-t text-gray-500'></div>
                                 </div>
 
