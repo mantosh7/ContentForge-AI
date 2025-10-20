@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { authState } from '@/state/authState';
 
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL ;
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ const Login = () => {
   async function handleLogin() {
 
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/login", {
+      const response = await axios.post("/api/auth/login", {
         email,
         password
       }, { withCredentials: true })

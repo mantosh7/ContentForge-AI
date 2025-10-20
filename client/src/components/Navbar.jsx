@@ -7,17 +7,17 @@ import { FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil';
 
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = useRecoilState(authState);
   const { isLoggedIn, username, loading } = auth;
 
-
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/auth/check-auth", { withCredentials: true });
+        const response = await axios.get("/api/auth/check-auth", { withCredentials: true });
         setAuth({
           isLoggedIn: response.data.loggedIn,
           username: response.data.username || "",
@@ -44,12 +44,11 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3000/api/auth/logout", {}, { withCredentials: true });
+      await axios.post(`/api/auth/logout`, {}, { withCredentials: true });
       setAuth({
         isLoggedIn: false,
         username: "",
-        loading: false,
-        userId: NULL,
+        loading: false
       })
       navigate("/");
     } catch (err) {

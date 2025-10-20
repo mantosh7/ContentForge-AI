@@ -6,6 +6,7 @@ import { CiUser } from "react-icons/ci";
 import { LuEyeClosed } from "react-icons/lu";
 import axios from 'axios';
 
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL ;
 
 const Signup = () => {
     const [fullName, setFullName] = useState("");
@@ -14,6 +15,8 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate() ;
 
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+
     const handleSignup = async (e) => {
         {
             e.preventDefault();
@@ -21,7 +24,7 @@ const Signup = () => {
             if (confirmPassword !== password) return alert('confirm password does not match');
 
             try {
-                const response = await axios.post("http://localhost:3000/api/auth/signup", {
+                const response = await axios.post("/api/auth/signup", {
                     full_name: fullName,
                     email,
                     password

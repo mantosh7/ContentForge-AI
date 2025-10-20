@@ -1,8 +1,13 @@
 import { authState } from "@/state/authState";
+import axios from "axios";
 import { Edit, Sparkle } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { IoSparklesSharp } from "react-icons/io5";
+import Markdown from "react-markdown";
 import { useRecoilValue } from "recoil";
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const articleLength = [
     { length: 800, text: "Short (500-800 words)" },
@@ -13,13 +18,34 @@ const articleLength = [
 const WriteArticle = () => {
     const [selectedLength, setselectedLength] = useState(articleLength[0]);
     const [input, setInput] = useState("");
-    const { userId } = useRecoilValue(authState );
+    const { userId } = useRecoilValue(authState);
+    const [loading, setLoading] = useState(false);
+    const [content, setContent] = useState('');
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const response = await axios.post("http://localhost:3000/api/ai/generate-article", {
-            prompt: input,
-        })
+
+        try {
+            setLoading(true);
+            const prompt = `write an article about ${input} in ${selectedLength.text}`;
+            const { data } = await axios.post("/api/ai/generate-article", {
+                prompt,
+                length: selectedLength.length,
+                userId
+            }, { withCredentials: true } 
+        )
+
+            if (data.success) {
+                setContent(data.content);
+            }
+            else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || error.message || "Something went wrong");
+        }
+
+        setLoading(false);
     }
 
     return (
@@ -43,24 +69,35 @@ const WriteArticle = () => {
                     })}
                 </div>
 
-                <button className="border-1 flex items-center justify-center gap-4 mt-6 w-full text-white py-2 px-3 bg-gradient-to-r from-[#29323c]  to-[#485563] rounded-lg cursor-pointer font-medium border border-gray-300">
-                    <Edit className="w-5" />
+                <button disabled={loading} className="border-1 flex items-center justify-center gap-4 mt-6 w-full text-white py-2 px-3 bg-gradient-to-r from-[#29323c]  to-[#485563] rounded-lg cursor-pointer font-medium border border-gray-300">
+                    {
+                        loading ? <span className="w-5 h-5 rounded-full border-2 border-t-transparent animate-spin"></span>
+                            : <Edit className="w-5" />
+                    }
                     Generate article
                 </button>
             </form>
 
             {/* right col */}
-            <div className="mt-10 ml-10 w-full max-w-lg p-4 text-black rounded-lg bg-white border border-gray-400 max-h-[600px] min-h-145">
+            <div className="min-h-[450px] max-h-[580px] overflow-y-scroll mt-10 ml-10 w-full max-w-lg text-black rounded-lg bg-white border border-gray-400 p-5">
                 <div className="flex items-center gap-3">
                     <Edit className="h-10 w-10 p-2 text-blue-400" />
                     <h1 className="font-semibold text-xl text-gray-700">Generated Article</h1>
                 </div>
 
                 <div className="flex-1 flex justify-center items-center">
-                    <div className="mt-30 text-md flex flex-col items-center gap-5 text-gray-400">
-                        <Edit className="h-12 w-12 p-2 text-gray-400" />
-                        <p className="font-semibold">Enter a topic and click “Generate article ” to get started</p>
-                    </div>
+                    {!content ? (
+                        <div className="mt-20 text-md flex flex-col items-center gap-5 text-gray-400">
+                            <Edit className="h-12 w-12 p-2 text-gray-400" />
+                            <p className="font-semibold">Enter a topic and click “Generate article ” to get started</p>
+                        </div>
+                    ) : (
+                        <div className="mt-3 text-sm h-full text-slate-600">
+                            <div className='reset-tw font-medium '>
+                                <Markdown>{content}</Markdown>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

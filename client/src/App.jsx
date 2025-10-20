@@ -13,11 +13,13 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import AppLayout from "./components/AppLayout"
 import ProtectedRoute from "./components/ProtectedRoute"
+import {Toaster} from "react-hot-toast" ;
 
 export default function App() {
   return <div>
+    <Toaster />
     <Routes>
-      
+    
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
