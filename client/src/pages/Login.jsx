@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { authState } from '@/state/authState';
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL ;
 
@@ -30,7 +31,7 @@ const Login = () => {
         userId: response.data.user.id
       });
 
-      alert(response.data.message);
+      toast.success(response.data.message);
       navigate("/ai");
 
     } catch (error) {
@@ -39,7 +40,7 @@ const Login = () => {
         error.response?.data?.error ||
         error.message;
 
-      alert(message);
+      toast.error(message); 
       console.error("Signup error:", message);
     }
   }

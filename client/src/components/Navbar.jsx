@@ -58,7 +58,7 @@ const Navbar = () => {
 
   return (
     <div className='fixed z-5 w-full h-20 backdrop-blur-2xl bg-[#1b1b1bff] border-b border-gray-700 flex justify-around items-center py-8 px-4 shadow-[0_4px_6px_rgba(255,255,255,0.09)]'>
-      <img src={assets.mylogo} alt='logo' className='h-12 w-auto cursor-pointer' onClick={() => navigate("/")} />
+      <img src={assets.mylogo} alt='logo' className='h-16 w-auto cursor-pointer' onClick={() => navigate("/")} />
 
       {isLoggedIn ? <div onClick={handleLogout} className="flex px-8 py-2 gap-3 cursor-pointer">
         <div><FaUserCircle className=" w-8 h-8 rounded-full" /></div>

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CiUser } from "react-icons/ci";
 import { LuEyeClosed } from "react-icons/lu";
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL ;
 
@@ -15,13 +16,11 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate() ;
 
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
-
     const handleSignup = async (e) => {
         {
             e.preventDefault();
 
-            if (confirmPassword !== password) return alert('confirm password does not match');
+            if (confirmPassword !== password) return toast.error('confirm password does not match');
 
             try {
                 const response = await axios.post("/api/auth/signup", {
@@ -32,7 +31,7 @@ const Signup = () => {
                 )
 
                 console.log("Signup successful:", response.data);
-                alert("Signup successful!");
+                toast.success(response.data.message);
                 navigate("/login") ;
                 
             } catch (error) {
@@ -41,7 +40,7 @@ const Signup = () => {
                     error.response?.data?.error ||  
                     error.message;                  
 
-                alert(message); 
+                toast.error(message); 
                 console.error("Signup error:", message);
             }
         };

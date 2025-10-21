@@ -1,8 +1,6 @@
-import { dummyCreationData } from "@/assets/assets";
 import CreationItem from "@/components/CreationItem";
 import { authState } from "@/state/authState";
 import axios from "axios";
-import { Sparkle } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoSparklesSharp } from "react-icons/io5";
@@ -31,7 +29,6 @@ const Dashboard = () => {
             else {
                 toast.error(data.message);
             }
-            // console.log(response.data.creations) ;
         } catch (error) {
             toast.error(error.response?.data?.message || error.message || "Something went wrong");
         }

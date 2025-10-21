@@ -20,7 +20,7 @@ export async function signup(req, res) {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(201).json({ user });
+    res.status(201).json({ message: "Sign up successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
