@@ -63,7 +63,7 @@ const RemoveBackground = () => {
             </form>
 
             {/* right col */}
-            <div className="min-h-[350px]  mt-10 ml-10 w-full max-w-lg p-4 text-black rounded-lg bg-white border border-gray-400 p-5">
+            <div className="min-h-[450px] max-h-[580px] overflow-y-scroll mt-10 ml-10 w-full max-w-lg p-4 text-black rounded-lg bg-white border border-gray-400 p-10">
                 <div className="flex items-center gap-3">
                     <Eraser className="h-10 w-10 p-2 text-[#7C4585]" />
                     <h1 className="font-semibold text-xl text-gray-700">Processed Image</h1>
@@ -77,7 +77,7 @@ const RemoveBackground = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className=" mt-3 flex justify-center items-center">
+                    <div className="mt-3 h-full">
                         <img src={content} alt="image" className="w-full h-auto max-w-full object-contain rounded-lg" />
                     </div>
                 )}

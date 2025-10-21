@@ -26,7 +26,8 @@ const Login = () => {
       setAuth({
         isLoggedIn: true,
         username: response.data.user.full_name,
-        loading: false
+        loading: false,
+        userId: response.data.user.id
       });
 
       alert(response.data.message);

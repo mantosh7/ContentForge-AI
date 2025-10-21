@@ -79,7 +79,7 @@ const WriteArticle = () => {
             </form>
 
             {/* right col */}
-            <div className="min-h-[450px] max-h-[580px] overflow-y-scroll mt-10 ml-10 w-full max-w-lg text-black rounded-lg bg-white border border-gray-400 p-5">
+            <div className="min-h-[450px] max-h-[580px] overflow-y-scroll mt-10 ml-10 w-full max-w-lg text-black rounded-lg bg-white border border-gray-400 p-10">
                 <div className="flex items-center gap-3">
                     <Edit className="h-10 w-10 p-2 text-blue-400" />
                     <h1 className="font-semibold text-xl text-gray-700">Generated Article</h1>

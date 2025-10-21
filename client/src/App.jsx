@@ -5,7 +5,6 @@ import WriteArticle from "./pages/WriteArticle"
 import BlogTitles from "./pages/BlogTitles"
 import Dashboard from "./pages/Dashboard"
 import GenerateImages from "./pages/GenerateImages"
-import Community from "./pages/Community"
 import RemoveBackground from "./pages/RemoveBackground"
 import RemoveObject from "./pages/RemoveObject"
 import ReviewResume from "./pages/ReviewResume"
@@ -32,7 +31,6 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path="write-article" element={<WriteArticle />} />
           <Route path="blog-titles" element={<BlogTitles />} />
-          <Route path="community" element={<Community />} />
           <Route path="generate-images" element={<GenerateImages />} />
           <Route path="remove-background" element={<RemoveBackground />} />
           <Route path="remove-object" element={<RemoveObject />} />

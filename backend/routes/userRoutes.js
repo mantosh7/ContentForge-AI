@@ -4,6 +4,6 @@ import { getUserCreations } from "../controllers/userController.js";
 
 const router = express.Router() ;
 
-router.get("/get-user-creations", authenticateToken, getUserCreations) ;
+router.post("/get-user-creations", authenticateToken, getUserCreations) ;
 
 export default router ;

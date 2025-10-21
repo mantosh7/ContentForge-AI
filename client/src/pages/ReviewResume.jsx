@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { authState } from "@/state/authState";
 import toast from "react-hot-toast";
+import Markdown from "react-markdown";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -14,27 +15,31 @@ const ReviewResume = () => {
     const [content, setContent] = useState('');
     const { userId } = useRecoilValue(authState);
 
-    const formData = new FormData();
-    formData.append("resume", input);
-    formData.append("userId", userId) ;
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
+
+            const formData = new FormData();
+            formData.append("resume", input);
+            formData.append("userId", userId);
+
             const { data } = await axios.post("/api/ai/resume-review", formData, { withCredentials: true });
 
             if (data.success) {
                 setContent(data.content);
             } else {
-                toast.error(data.message);
+                toast.error(data.error || "Something went wrong");
             }
 
             setLoading(false);
 
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.response?.data?.message || error.message || "Something went wrong");
         }
+        setLoading(false) ;
     }
 
     return (

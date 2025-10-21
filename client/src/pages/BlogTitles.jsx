@@ -78,7 +78,7 @@ const BlogTitles = () => {
             </form>
 
             {/* right col */}
-            <div className="h-[385px] overflow-y-scroll mt-10 ml-10 w-full max-w-lg p-4 text-black rounded-lg bg-white border border-gray-400 p-5">
+            <div className="h-[385px] overflow-y-scroll mt-10 ml-10 w-full max-w-lg p-4 text-black rounded-lg bg-white border border-gray-400 p-10">
                 <div className="flex items-center gap-3">
                     <Hash className="h-10 w-10 p-2 text-[#7C4585]" />
                     <h1 className="font-semibold text-xl text-gray-700">Generated Title</h1>

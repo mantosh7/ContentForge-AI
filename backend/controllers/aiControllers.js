@@ -2,8 +2,8 @@ import OpenAI from "openai";
 import sql from "../configs/db.js";
 import { GoogleGenAI } from "@google/genai";
 import { v2 as cloudinary } from "cloudinary";
+import pdfParse from "pdf-parse-fork";
 import fs from "fs";
-// import pdf from "pdf-parse/lib/pdf.js";
 import axios from "axios";
 
 // for article & blog-title
@@ -138,20 +138,18 @@ export async function removeImageObject(req, res) {
 
 export async function reviewResume(req, res) {
     try {
-        const userId  = req.body.user;
+        const userId = req.body.userId;
         const resume = req.file;
 
         if (resume.size > 5 * 1024 * 1024) {
             return res.status(401).json({ success: false, message: 'Resume file size exceeds allowed size (5MB).' })
         }
 
-        const pdfParse = await import("pdf-parse");
-        const pdf = pdfParse.default || pdfParse;;
-
         const dataBuffer = fs.readFileSync(resume.path);
-        const pdfData = await pdf(dataBuffer);
+        const pdfData = await pdfParse(dataBuffer);
+        const fullText = pdfData.text;
 
-        const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses and areas for improvement. Resume Content:\n\n${pdfData.text}`;
+        const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses and areas for improvement. Resume Content:\n\n${fullText}`;
 
         const response = await AI.chat.completions.create({
             model: "gemini-2.0-flash",

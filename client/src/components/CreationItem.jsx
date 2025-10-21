@@ -18,8 +18,8 @@ const CreationItem = ({item}) => {
       {expanded && (
         <div className=''>
           {item.type === 'image' ? (
-            <div>
-              <img src={item.content} alt='Image' className='mt-3 w-full h-auto max-w-md' />
+            <div className='mt-3 overflow-y-scroll max-h-[500px]'>
+              <img src={item.content} alt='Image' className='mt-3 w-full h-full max-w-md' />
             </div>
           ) : (
             <div className='mt-3 overflow-y-scroll text-sm h-48 text-[#FFE797]'>
